@@ -1,0 +1,78 @@
+<div class="container mt-3 w-75">
+    <h3 class="text-center">Register Here</h3>
+    <div class=" mt-5">
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert" *ngIf="show" [ngClass]="registered?'alert-success':'alert-danger'">
+        <span *ngIf="registered">user Register successfully!!</span>
+        <span *ngIf="!registered">User already exist.Please login.</span>
+    </div>
+    <!-- [formGroup]="signupForm" -->
+    <form #signupForm="ngForm"  (ngSubmit)="formSubmit(signupForm.value); signupForm.resetForm() ">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">FirstName</label>
+            <div class="col-sm-10">
+                <input required type="text" class="form-control" name="firstName" [(ngModel)]="user.firstName" #firstName="ngModel" minlength="2">
+                <div>
+                    <small class="text-danger" *ngIf="firstName.errors?.['minlength']">FirstName must be atleast 2 letter.</small>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">LastName</label>
+            <div class="col-sm-10">
+                <input required type="text" class="form-control" name="Lastname" [(ngModel)]="user.lastName" #lastName="ngModel" minlength="3" >
+                <div>
+                    <small class="text-danger" *ngIf="lastName.errors?.['minlength']">LastName must be atleast 3 letter.</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">username</label>
+            <div class="col-sm-10">
+                <input required type="text" class="form-control" name="username" [(ngModel)]="user.username" #username="ngModel" minlength="6" pattern="[A-Za-z0-9_]*" >
+                <div>
+                    <small class="text-danger" *ngIf="username.errors?.['minlength']">userName must be atleast 6 letter.</small>
+                    <small class="text-danger" *ngIf="username.errors?.['pattern']">username cannot have blankspace or characters.</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input required type="password" class="form-control" name="password" [(ngModel)]="user.password"  #password="ngModel" minlength="6" pattern="[^\s]*">
+                <div>
+                    <small class="text-danger" *ngIf="password.errors?.['minlength']">password must be atleast 6 letter.</small>
+                    <small class="text-danger" *ngIf="password.errors?.['pattern']">password cannot have blankspace.</small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input required type="email" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel"  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+                <div>
+                    <small class="text-danger" *ngIf="email.errors?.['pattern']">please enter valid email.</small>
+                </div>
+                    
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">PhoneNo.</label>
+            <div class="col-sm-10">
+                <input  required type="text" class="form-control" name="PhoneNumber" [(ngModel)]="user.phone"  #phone="ngModel" minlength="10" pattern="[0-9_]*">
+                <div>
+                    <small class="text-danger" *ngIf="phone.errors?.['minlength']">phonenumber must be 10 digit.</small>
+                    <small class="text-danger" *ngIf="phone.errors?.['pattern']">phone number can only contain numbers.</small>
+                </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="col-sm-10">
+                <button [disabled]="signupForm.invalid" style="margin-left: 80px" type="submit" class="btn btn-primary">Sign Up</button>
+                <a style="margin-left: 20px" type="submit" class="btn btn-primary" href="/signup">Clear</a>
+            </div>
+        </div>
+    </form>
+    </div>
+
+</div>
